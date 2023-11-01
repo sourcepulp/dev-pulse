@@ -567,7 +567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@google-labs/breadboard@npm:^0.4.0":
+"@google-labs/breadboard@npm:^0.4.0, @google-labs/breadboard@npm:^0.4.1":
   version: 0.4.1
   resolution: "@google-labs/breadboard@npm:0.4.1"
   checksum: 29d71c1188d860a3c9d567e5297702a2e2e7dd8e015a6b31bd3fb032897fd8438e7b4122c777b6373855efd1eb9a18526e0edab0942e6fd90958b741ce224bb4
@@ -1025,6 +1025,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/uuid@npm:^9":
+  version: 9.0.6
+  resolution: "@types/uuid@npm:9.0.6"
+  checksum: 739dcb2e620ff097fa916edeab455eb75640c4883a850784fdb15b32f67b719e05275c6d6419bb6da11350d26bd14ed05ba5e992ff228411cdd98cbc772d71ef
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/eslint-plugin@npm:^6.0.0":
   version: 6.9.1
   resolution: "@typescript-eslint/eslint-plugin@npm:6.9.1"
@@ -1351,9 +1358,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:."
   dependencies:
+    "@google-labs/breadboard": "npm:^0.4.1"
     "@paulkinlan/transformerjs-breadboard-kit": "npm:^1.2.0"
     "@types/react": "npm:^18.2.15"
     "@types/react-dom": "npm:^18.2.7"
+    "@types/uuid": "npm:^9"
     "@typescript-eslint/eslint-plugin": "npm:^6.0.0"
     "@typescript-eslint/parser": "npm:^6.0.0"
     "@vitejs/plugin-react": "npm:^4.0.3"
@@ -1365,6 +1374,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     sass: "npm:^1.69.5"
     typescript: "npm:^5.0.2"
+    uuid: "npm:^9.0.1"
     vite: "npm:^4.4.5"
   languageName: unknown
   linkType: soft
@@ -4410,6 +4420,15 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "uuid@npm:9.0.1"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 9d0b6adb72b736e36f2b1b53da0d559125ba3e39d913b6072f6f033e0c87835b414f0836b45bcfaf2bdf698f92297fea1c3cc19b0b258bc182c9c43cc0fab9f2
   languageName: node
   linkType: hard
 

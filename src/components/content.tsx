@@ -1,16 +1,26 @@
-import { Button, Form, Input, Layout } from 'antd';
+import { Button, Form, Input, Layout } from "antd";
+import { useBoardContext } from "../board/context";
+import { Result } from "../board/types";
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
 
 type FieldType = {
 	phrase: string;
 };
 
-const onSubmit = (values: FieldType) => {
-	console.log(values.phrase);
-};
-
 const Content = (): React.JSX.Element => {
 	const { Content: ContentLayout } = Layout;
+	const [result, setResult] = useState<Result | null>(null);
 
+	const { runOnce } = useBoardContext();
+
+	const onSubmit = async (values: FieldType) => {
+		const res = await runOnce(
+			"Xenova/distilbert-base-uncased-finetuned-sst-2-english",
+			values.phrase
+		);
+		setResult(res);
+	};
 
 	return (
 		<ContentLayout>
@@ -36,6 +46,7 @@ const Content = (): React.JSX.Element => {
 					</Button>
 				</Form.Item>
 			</Form>
+			{result && result.text.map((r) => <p key={uuid()}>{`${r.label} (${r.score})`}</p>)}
 		</ContentLayout>
 	);
 };
