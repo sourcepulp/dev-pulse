@@ -1,9 +1,10 @@
-import { useState } from 'react'
+
+import Main from './components/main'
 
 function App() {
 
   return (
-    <>Dev-Pulse</>
+    <Main />
   )
 }
 
