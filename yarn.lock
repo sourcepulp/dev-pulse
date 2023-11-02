@@ -567,7 +567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@google-labs/breadboard@npm:^0.4.0, @google-labs/breadboard@npm:^0.4.1":
+"@google-labs/breadboard@npm:^0.4.0":
   version: 0.4.1
   resolution: "@google-labs/breadboard@npm:0.4.1"
   checksum: 29d71c1188d860a3c9d567e5297702a2e2e7dd8e015a6b31bd3fb032897fd8438e7b4122c777b6373855efd1eb9a18526e0edab0942e6fd90958b741ce224bb4
@@ -1358,7 +1358,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:."
   dependencies:
-    "@google-labs/breadboard": "npm:^0.4.1"
     "@paulkinlan/transformerjs-breadboard-kit": "npm:^1.2.0"
     "@types/react": "npm:^18.2.15"
     "@types/react-dom": "npm:^18.2.7"
