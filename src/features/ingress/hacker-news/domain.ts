@@ -1,6 +1,6 @@
-type HackerNewsId = number;
+export type HackerNewsId = number;
 
-type HackerNewsPost = {
+export type HackerNewsPost = {
 	id: HackerNewsId;
 	created_at: string;
 	author: string;
