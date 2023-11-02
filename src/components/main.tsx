@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import AppHeader from "./app-header";
 import Content from "./content";
-import { BoardContextProvider } from "../board/context";
+import { BoardContextProvider } from "../features/board/context";
 import { TransformersJS } from "@paulkinlan/transformerjs-breadboard-kit";
 
 const Main = (): React.JSX.Element => {

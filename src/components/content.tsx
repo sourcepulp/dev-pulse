@@ -1,6 +1,6 @@
 import { Button, Form, Input, Layout } from "antd";
-import { useBoardContext } from "../board/context";
-import { Result } from "../board/types";
+import { useBoardContext } from "../features/board/context";
+import { Result } from "../features/board/types";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
