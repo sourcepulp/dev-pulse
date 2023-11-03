@@ -1,4 +1,5 @@
 import { HackerNewsPost } from "../features/ingress/hacker-news/domain";
+import { HackerNewsRepository } from "../features/ingress/hacker-news/repository";
 import { BasicRepository } from "./basic-repository";
 import { FetchApiHttpClient } from "./http-client/fetch-api-http-client";
 import { HttpClient } from "./http-client/http-client";
@@ -7,6 +8,8 @@ import { Repository } from "./repository";
 export class ApplicationContext {
 	private static instance: ApplicationContext;
 	private httpClient: HttpClient = new FetchApiHttpClient();
+
+	private constructor() {}
 
 	public static init() {
 		ApplicationContext.instance = new ApplicationContext();
@@ -20,20 +23,17 @@ export class ApplicationContext {
 	}
 
 	public getHttpClient(): HttpClient {
-		return ApplicationContext.get().httpClient;
+		return this.httpClient;
 	}
 
 	private hackerNewsRepository?: Repository<HackerNewsPost>;
 
-	public getHackerNewsRepository() {
-		if (!ApplicationContext.get().hackerNewsRepository) {
-			const serviceUrl = "test";
-			ApplicationContext.instance.hackerNewsRepository =
-				new BasicRepository<HackerNewsPost>(
-					ApplicationContext.instance.getHttpClient(),
-					serviceUrl
-				);
+	public getHackerNewsRepository(): Repository<HackerNewsPost> {
+		if (!this.hackerNewsRepository) {
+			this.hackerNewsRepository = new HackerNewsRepository(
+				this.getHttpClient()
+			);
 		}
-		return ApplicationContext.get().hackerNewsRepository;
+		return this.hackerNewsRepository;
 	}
 }
