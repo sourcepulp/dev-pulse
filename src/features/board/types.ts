@@ -6,3 +6,8 @@ export type ResultText = {
 export type Result = {
 	text: ResultText[]
 }
+
+export type ResultWithValue = {
+	value: string;
+	result: Result;
+}
