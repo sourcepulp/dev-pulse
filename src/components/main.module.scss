@@ -1,0 +1,15 @@
+.navLinkContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.navLink {
+	display: flex;
+	align-items: center;
+	color: white;
+	padding-left: 50px;
+	padding-right: 50px;
+	height: 64px;
+	font-size: 14px;
+	border-bottom: 1px solid white;
+}
