@@ -11,12 +11,12 @@ const routeItems: { path: string; element: React.ReactNode }[] = [
 	},
 	{
 
-		path: "/phrase-sentiment",
+		path: "/phrase-sentiment/*",
 		element: <SentimentAnalysis />
 	},
 	{
 
-		path: "/hacker-news-sentiment",
+		path: "/hacker-news-sentiment/*",
 		element: <HackerNewsSentiment />
 	}
 ];
@@ -25,8 +25,8 @@ const AppRoutes = (): React.JSX.Element => {
 
 	return (
 		<Routes>
-			{routeItems.map((route) => (
-				<Route path={route.path} element={route.element} />
+			{routeItems.map((route, key) => (
+				<Route path={route.path} element={route.element} key={key} />
 			))}
 		</Routes>
 	);

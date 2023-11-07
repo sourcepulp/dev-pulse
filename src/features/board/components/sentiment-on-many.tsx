@@ -6,9 +6,11 @@ import ResultCard from "./result-card";
 
 type SentimentOnManyProps = {
 	values: string[];
+	handlePostClick: () => void;
 };
 const SentimentOnMany = ({
 	values,
+	handlePostClick
 }: SentimentOnManyProps): React.JSX.Element => {
 	const [results, setResults] = useState<ResultWithValue[]>([]);
 
@@ -30,7 +32,7 @@ const SentimentOnMany = ({
 			{results.length > 0 ? (
 				<>
 					{results.map((r) => (
-						<ResultCard key={`${r.value}${r.result.text[0].score}`} value={r.value} result={r.result} />
+						<ResultCard key={`${r.value}${r.result.text[0].score}`} value={r.value} result={r.result} onPostClick={handlePostClick} />
 					))}
 				</>
 			) : (

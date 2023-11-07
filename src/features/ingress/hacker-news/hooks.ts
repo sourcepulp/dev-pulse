@@ -1,30 +1,59 @@
-import { useSelector } from "react-redux"
-import { selectAllPosts } from "./selectors"
+import { useSelector } from "react-redux";
+import { selectAllPosts, selectPostById } from "./selectors";
 import { useAppDispatch } from "../../../core/redux/hooks";
-import { fetchPosts } from "./thunks";
-import { useEffect } from "react";
+import { fetchPostById, fetchPosts } from "./thunks";
+import { useCallback, useEffect } from "react";
+import { HackerNewsPost } from "./domain";
+import { RootState } from "../../../core/redux/store-types";
 
-type HookOptions = {
-	prefetch?: boolean;
-} | undefined;
+type HookOptions =
+  | {
+      prefetch?: boolean;
+    }
+  | undefined;
 
-const useHackerNewsPosts = (options: HookOptions) => {
-	const posts = useSelector(selectAllPosts);
-	const appDispatch = useAppDispatch();
+export const useHackerNewsPosts = (options: HookOptions) => {
+  const posts = useSelector(selectAllPosts);
+  const appDispatch = useAppDispatch();
 
-	const fetch = async () => {
-		appDispatch.setStatusLoading();
-		await appDispatch.dispatch(fetchPosts());
-		appDispatch.setStatusSuccess();
-	};
+  const fetch = async () => {
+    appDispatch.setStatusLoading();
+    await appDispatch.dispatch(fetchPosts());
+    appDispatch.setStatusSuccess();
+  };
 
-	useEffect(() => {
-		if (options?.prefetch) {
-			fetch();
-		}
-	}, []);
+  useEffect(() => {
+    if (options?.prefetch) {
+      fetch();
+    }
+  }, []);
 
-	return { posts, fetch };
+  return { posts, fetch };
 };
 
-export default useHackerNewsPosts;
+export const useHackerNewsPost = (
+  id: string
+): {
+  hackerNewsPost: HackerNewsPost | undefined;
+} => {
+  const appDispatch = useAppDispatch();
+  const hackerNewsPost = useSelector((state: RootState) =>
+    selectPostById(state, id)
+  );
+  const fetchPost = useCallback(
+    async (postId: string) => {
+      await appDispatch.dispatch(fetchPostById({ id: postId }));
+    },
+    [appDispatch.dispatch]
+  );
+
+  useEffect(() => {
+    if (!hackerNewsPost && id !== "") {
+      fetchPost(id);
+    }
+  }, [hackerNewsPost, id, fetchPost]);
+
+  return {
+    hackerNewsPost,
+  };
+};
