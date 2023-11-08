@@ -13,6 +13,7 @@ const SentimentOnMany = ({
 	handlePostClick
 }: SentimentOnManyProps): React.JSX.Element => {
 	const [results, setResults] = useState<ResultWithValue[]>([]);
+	console.log(results);
 
 	const { runOnceOnMany } = useBoardContext();
 

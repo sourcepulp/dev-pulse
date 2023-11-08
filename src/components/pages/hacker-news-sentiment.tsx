@@ -2,24 +2,24 @@ import { useHackerNewsPost, useHackerNewsPosts } from "../../features/ingress/ha
 import SentimentOnMany from "../../features/board/components/sentiment-on-many";
 import { Route, Routes, useLocation, useNavigate, useNavigation, useParams } from "react-router";
 import HackerNewsPostView from "./hacker-news-post";
+import { useState } from "react";
 
 const HackerNewsSentiment = (): React.JSX.Element => {
 	const navigate = useNavigate();
 	const { posts } = useHackerNewsPosts({ prefetch: true });
 	const id = "38166420";
-	const { hackerNewsPost } = useHackerNewsPost(id);
-	const { pathname } = useLocation();
-	console.log(pathname);
 
 	const handlePostClick = (): void => {
-		navigate(`/hacker-news-sentiment/${id}`)
+		navigate(`/hacker-news-sentiment/posts/${id}`);
 	};
+
+	const { hackerNewsPost } = useHackerNewsPost(id);
 
 	return (
 		<div>
 			<Routes>
-				<Route path="" element={<SentimentOnMany values={posts.map(p => p.title)} handlePostClick={handlePostClick} />} />
-				<Route path=":id" element={<HackerNewsPostView hackerNewsPost={hackerNewsPost} />} />
+				<Route path="/posts" element={<SentimentOnMany values={posts.map(p => p.title)} handlePostClick={handlePostClick} />} />
+				<Route path="/posts/:id" element={<HackerNewsPostView hackerNewsPost={hackerNewsPost} />} />
 			</Routes>
 		</div>
 	);

@@ -4,7 +4,7 @@ import { Result } from "../types";
 type ResultCardProps = {
 	value: string;
 	result: Result;
-	onPostClick: () => void;
+	onPostClick?: () => void;
 };
 const ResultCard = ({ value, result, onPostClick }: ResultCardProps): React.JSX.Element => {
 	return (

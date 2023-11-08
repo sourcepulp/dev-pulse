@@ -1,13 +1,14 @@
 export type ResultText = {
-	label: string;
-	score: number;
-}
+  label: string;
+  score: number;
+};
 
 export type Result = {
-	text: ResultText[]
-}
+  text: ResultText[];
+  id: string;
+};
 
 export type ResultWithValue = {
-	value: string;
-	result: Result;
-}
+  value: string;
+  result: Result;
+};
