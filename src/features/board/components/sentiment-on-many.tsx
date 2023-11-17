@@ -6,7 +6,7 @@ import ResultCard from "./result-card";
 
 type SentimentOnManyProps = {
 	values: Value[];
-	handlePostClick: (id: string) => void;
+	handlePostClick?: (id: string) => void;
 };
 const SentimentOnMany = ({
 	values,
@@ -27,7 +27,7 @@ const SentimentOnMany = ({
 	}, [values]);
 
 	const handleClick = (id: string) => () => {
-		handlePostClick(id);
+		if (handlePostClick) handlePostClick(id);
 	}
 
 	return (

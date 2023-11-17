@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 import HackerNewsNavigation from "./components/pages/hacker-news-navigation";
 import SentimentAnalysis from "./components/pages/sentiment-analysis";
 import Home from "./components/pages/home";
@@ -6,31 +6,27 @@ import Home from "./components/pages/home";
 const routeItems: { path: string; element: React.ReactNode }[] = [
 	{
 
-		path: "/",
+		path: "home",
 		element: <Home />
 	},
 	{
 
-		path: "/phrase-sentiment/*",
+		path: "phrase-sentiment",
 		element: <SentimentAnalysis />
 	},
 	{
 
-		path: "/hacker-news-sentiment/*",
+		path: "hacker-news-sentiment/*",
 		element: <HackerNewsNavigation />
 	}
 ];
 
-const AppRoutes = (): React.JSX.Element => {
-
-	return (
-		<Routes>
-			{routeItems.map((route, key) => (
-				<Route path={route.path} element={route.element} key={key} />
-			))}
-		</Routes>
-	);
-
-};
+const AppRoutes = (): JSX.Element => (
+	<Routes>
+		{routeItems.map((route, key) => (
+			<Route key={key} path={route.path} element={route.element} />
+		))}
+	</Routes>
+);
 
 export default AppRoutes;
