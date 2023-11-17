@@ -7,53 +7,53 @@ import { HackerNewsPost } from "./domain";
 import { RootState } from "../../../core/redux/store-types";
 
 type HookOptions =
-  | {
-      prefetch?: boolean;
-    }
-  | undefined;
+	| {
+		prefetch?: boolean;
+	}
+	| undefined;
 
 export const useHackerNewsPosts = (options: HookOptions) => {
-  const posts = useSelector(selectAllPosts);
-  const appDispatch = useAppDispatch();
+	const posts = useSelector(selectAllPosts);
+	const appDispatch = useAppDispatch();
 
-  const fetch = async () => {
-    appDispatch.setStatusLoading();
-    await appDispatch.dispatch(fetchPosts());
-    appDispatch.setStatusSuccess();
-  };
+	const fetch = async () => {
+		appDispatch.setStatusLoading();
+		await appDispatch.dispatch(fetchPosts());
+		appDispatch.setStatusSuccess();
+	};
 
-  useEffect(() => {
-    if (options?.prefetch) {
-      fetch();
-    }
-  }, []);
+	useEffect(() => {
+		if (options?.prefetch) {
+			fetch();
+		}
+	}, []);
 
-  return { posts, fetch };
+	return { posts, fetch };
 };
 
 export const useHackerNewsPost = (
-  id: string
+	id: string | number
 ): {
-  hackerNewsPost: HackerNewsPost | undefined;
+	hackerNewsPost: HackerNewsPost | undefined;
 } => {
-  const appDispatch = useAppDispatch();
-  const hackerNewsPost = useSelector((state: RootState) =>
-    selectPostById(state, id)
-  );
-  const fetchPost = useCallback(
-    async (postId: string) => {
-      await appDispatch.dispatch(fetchPostById({ id: postId }));
-    },
-    [appDispatch.dispatch]
-  );
+	const appDispatch = useAppDispatch();
+	const hackerNewsPost = useSelector((state: RootState) =>
+		selectPostById(state, id)
+	);
+	const fetchPost = useCallback(
+		async (postId: string | number) => {
+			await appDispatch.dispatch(fetchPostById({ id: postId }));
+		},
+		[appDispatch.dispatch]
+	);
 
-  useEffect(() => {
-    if (!hackerNewsPost && id !== "") {
-      fetchPost(id);
-    }
-  }, [hackerNewsPost, id, fetchPost]);
+	useEffect(() => {
+		if (!hackerNewsPost) {
+			fetchPost(id);
+		}
+	}, [hackerNewsPost, id, fetchPost]);
 
-  return {
-    hackerNewsPost,
-  };
+	return {
+		hackerNewsPost,
+	};
 };

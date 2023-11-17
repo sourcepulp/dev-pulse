@@ -2,7 +2,7 @@ export type HackerNewsId = string;
 
 export type HackerNewsPost = {
   id: HackerNewsId;
-  story_id: HackerNewsId;
+  objectID: HackerNewsId;
   created_at: string;
   author: string;
   text: string;

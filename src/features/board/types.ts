@@ -5,10 +5,14 @@ export type ResultText = {
 
 export type Result = {
   text: ResultText[];
-  id: string;
 };
 
 export type ResultWithValue = {
-  value: string;
+  value: Value;
   result: Result;
+};
+
+export type Value = {
+  id: string;
+  value: string;
 };

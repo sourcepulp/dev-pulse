@@ -8,12 +8,12 @@ import {
 	useState,
 } from "react";
 import { BoardService } from "./service";
-import { Result, ResultWithValue } from "./types";
+import { Result, ResultWithValue, Value } from "./types";
 import { NodeValue } from "@google-labs/breadboard";
 
 type BoardContextType = {
 	runOnce: (model: string, input: string) => Promise<any>;
-	runOnceOnMany: (model: string, input: string[]) => Promise<any>;
+	runOnceOnMany: (model: string, input: Value[]) => Promise<ResultWithValue[]>;
 };
 
 export const BoardContext = createContext<BoardContextType | null>(null);
@@ -51,10 +51,10 @@ export const BoardContextProvider: React.FC<BoardContextProviderProps> = ({
 	);
 
 	const runOnceOnMany = useCallback(
-		async (model: string, inputValues: string[]) => {
+		async (model: string, inputValues: Value[]) => {
 			const result: ResultWithValue[] = await Promise.all(
 				inputValues.map(async (inputValue) => {
-					const r = await board.runOnce(model, inputValue);
+					const r = await board.runOnce(model, inputValue.value);
 					return { value: inputValue, result: r as unknown as Result };
 				})
 			);

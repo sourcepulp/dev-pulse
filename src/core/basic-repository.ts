@@ -14,7 +14,6 @@ export class BasicRepository<R extends BaseDTO> implements Repository<R> {
 		this.serviceUrl = serviceUrl;
 	}
 
-
 	async getAll(): Promise<R[]> {
 		const response = await this.httpClient.get(`${this.serviceUrl}`);
 		if (!response.ok) {
@@ -26,7 +25,7 @@ export class BasicRepository<R extends BaseDTO> implements Repository<R> {
 		return (await response.json()) as Promise<R[]>;
 	}
 
-	async getOneById(id: string): Promise<R> {
+	async getOneById(id: string | number): Promise<R> {
 		const response = await this.httpClient.get(`${this.serviceUrl}${id}`);
 		if (!response.ok) {
 			const error = new Error("GET Error") as ResponseError;

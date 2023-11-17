@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
-import { Result, ResultWithValue } from "../types";
+import { Result, ResultWithValue, Value } from "../types";
 import { useBoardContext } from "../context";
 import { Card, Spin } from "antd";
 import ResultCard from "./result-card";
 
 type SentimentOnManyProps = {
-	values: string[];
-	handlePostClick: () => void;
+	values: Value[];
+	handlePostClick: (id: string) => void;
 };
 const SentimentOnMany = ({
 	values,
 	handlePostClick
 }: SentimentOnManyProps): React.JSX.Element => {
 	const [results, setResults] = useState<ResultWithValue[]>([]);
-	console.log(results);
-
 	const { runOnceOnMany } = useBoardContext();
 
 	useEffect(() => {
@@ -28,12 +26,16 @@ const SentimentOnMany = ({
 		run();
 	}, [values]);
 
+	const handleClick = (id: string) => () => {
+		handlePostClick(id);
+	}
+
 	return (
 		<Card title="Hacker News Posts Sentiment" data-cy="SentimentOnMany">
 			{results.length > 0 ? (
 				<>
 					{results.map((r) => (
-						<ResultCard key={`${r.value}${r.result.text[0].score}`} value={r.value} result={r.result} onPostClick={handlePostClick} />
+						<ResultCard key={`${r.value.value}${r.result.text[0].score}`} value={r.value} result={r.result} onPostClick={handleClick(r.value.id)} />
 					))}
 				</>
 			) : (

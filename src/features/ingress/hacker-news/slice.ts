@@ -14,7 +14,7 @@ const hackerNewsPostSlice = createSlice({
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
       hackerNewsPostCRUDAdapter.upsertMany(
         state,
-        action.payload.map((post) => ({ ...post, id: post.story_id }))
+        action.payload.map((post) => ({ ...post, id: post.objectID }))
       );
     });
     builder.addCase(

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import HackerNewsSentiment from "./components/pages/hacker-news-sentiment";
+import HackerNewsNavigation from "./components/pages/hacker-news-navigation";
 import SentimentAnalysis from "./components/pages/sentiment-analysis";
 import Home from "./components/pages/home";
 
@@ -17,7 +17,7 @@ const routeItems: { path: string; element: React.ReactNode }[] = [
 	{
 
 		path: "/hacker-news-sentiment/*",
-		element: <HackerNewsSentiment />
+		element: <HackerNewsNavigation />
 	}
 ];
 

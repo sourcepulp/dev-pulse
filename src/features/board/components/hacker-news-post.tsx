@@ -1,10 +1,10 @@
 import { Card, Divider, Spin } from "antd";
-import { HackerNewsPost } from "../../features/ingress/hacker-news/domain";
+import { HackerNewsPost } from "../../ingress/hacker-news/domain";
 import { useEffect, useState } from "react";
-import { ResultWithValue } from "../../features/board/types";
-import { useBoardContext } from "../../features/board/context";
-import { useHackerNewsPost } from "../../features/ingress/hacker-news/hooks";
-import ResultCard from "../../features/board/components/result-card";
+import { ResultWithValue, Value } from "../types";
+import { useBoardContext } from "../context";
+import { useHackerNewsPost } from "../../ingress/hacker-news/hooks";
+import ResultCard from "./result-card";
 
 type HackerNewsPostViewProps = {
 	hackerNewsPost: HackerNewsPost | undefined;
@@ -14,12 +14,10 @@ const HackerNewsPostView = ({ hackerNewsPost }: HackerNewsPostViewProps): React.
 	const [results, setResults] = useState<ResultWithValue[]>([]);
 	const { runOnceOnMany } = useBoardContext();
 
-	const postId = hackerNewsPost?.id;
-
-	const getCommentsArray = (): string[] => {
+	const getCommentsArray = (): Value[] => {
 		const comments = hackerNewsPost?.children;
-		let commentsArray: string[] = [];
-		comments?.map((comment) => commentsArray.push(comment?.text));
+		let commentsArray: Value[] = [];
+		comments?.map((comment) => commentsArray.push({ value: comment?.text, id: comment.id }));
 		commentsArray = commentsArray.slice(0, 10);
 		return commentsArray;
 	}
@@ -42,7 +40,7 @@ const HackerNewsPostView = ({ hackerNewsPost }: HackerNewsPostViewProps): React.
 		<Card title="Hacker News Comments Sentiment" data-cy="SentimentOnMany">
 			{results.length > 0 ? (
 				<>
-					{results.map((r) => <ResultCard key={`${r.value}${r.result.text[0].score}`} value={r.value} result={r.result} />)}
+					{results.map((r) => <ResultCard key={`${r.value.value}${r.result.text[0].score}`} value={r.value} result={r.result} />)}
 				</>
 			) : (
 				<Spin tip="Loading" size="small">

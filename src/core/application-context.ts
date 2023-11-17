@@ -1,6 +1,5 @@
 import { HackerNewsPost } from "../features/ingress/hacker-news/domain";
 import { HackerNewsRepository } from "../features/ingress/hacker-news/repository";
-import { BasicRepository } from "./basic-repository";
 import { FetchApiHttpClient } from "./http-client/fetch-api-http-client";
 import { HttpClient } from "./http-client/http-client";
 import { Repository } from "./repository";
@@ -9,7 +8,7 @@ export class ApplicationContext {
 	private static instance: ApplicationContext;
 	private httpClient: HttpClient = new FetchApiHttpClient();
 
-	private constructor() {}
+	private constructor() { }
 
 	public static init() {
 		ApplicationContext.instance = new ApplicationContext();
