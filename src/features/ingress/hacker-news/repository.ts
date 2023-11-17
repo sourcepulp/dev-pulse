@@ -19,6 +19,15 @@ export class HackerNewsRepository implements Repository<HackerNewsPost> {
 		return responseObject.hits;
 	}
 
+	async getCommentsForPost(id: string | number): Promise<HackerNewsPost[]> {
+		const url = `http://hn.algolia.com/api/v1/search?tags=comment,story_${id}`;
+		const response = await this.httpClient.get(url).catch((error) => {
+			throw error;
+		});
+		const responseObject = (await response.json()) as HackerNewsResponse;
+		return responseObject.hits;
+	}
+
 	async getOneById(id: string | number): Promise<HackerNewsPost> {
 		const url = `https://hn.algolia.com/api/v1/items/${id}`;
 		const response = await this.httpClient.get(url).catch((error) => {
